@@ -9,7 +9,7 @@
 	<artifactId>backend</artifactId>
 	<dependencies>
 		<dependency>
-      <groupId>org.springframework.boot</groupId>
+      		<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		<dependency>
@@ -83,12 +83,19 @@
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>5.5</version> <!-- Use the latest version available -->
 		</dependency>
+		<dependency>
+    		<groupId>org.seleniumhq.selenium</groupId>
+    		<artifactId>selenium-java</artifactId>
+   			<version>3.141.59</version>
+		</dependency>
+		
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -140,6 +147,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+    			<groupId>org.apache.maven.plugins</groupId>
+   				<artifactId>maven-compiler-plugin</artifactId>
+    			<version>3.10.1</version> <!-- Essayez d'abord avec 3.8.1, stable pour Java 17. Passez à 3.10.1 si nécessaire pour Java 21 -->
+    			<configuration>
+        			<source>17</source> <!-- Changez en 21 si vous utilisez Java 21 -->
+        			<target>17</target> <!-- Changez en 21 si vous utilisez Java 21 -->
+    			</configuration>
 			</plugin>
 
 

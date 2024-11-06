@@ -23,5 +23,6 @@
     <modules>
         <module>backend</module>
         <module>gatling</module>
+        
     </modules>
 </project>

@@ -1,28 +1,31 @@
 package ca.etsmtl.taf.controller;
 
-import ca.etsmtl.taf.dto.SeleniumCaseDto;
-import ca.etsmtl.taf.entity.SeleniumCaseResponse;
-import ca.etsmtl.taf.service.SeleniumService;
+import ca.etsmtl.taf.selenium.payload.SeleniumTestService;
+import ca.etsmtl.taf.selenium.payload.requests.SeleniumCase;
+import ca.etsmtl.taf.selenium.payload.requests.SeleniumResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class TestSeleniumController {
-    private final SeleniumService seleniumService;
+    private final SeleniumTestService seleniumTestService;
 
-    public TestSeleniumController(SeleniumService seleniumService) {
-        this.seleniumService = seleniumService;
+    public TestSeleniumController(SeleniumTestService seleniumTestService) {
+        this.seleniumTestService = seleniumTestService;
     }
 
     @PostMapping("/testselenium")
-    public ResponseEntity<List<SeleniumCaseResponse>> runTests(@RequestBody List<SeleniumCaseDto> seleniumCases) throws URISyntaxException, IOException, InterruptedException {
-        List<SeleniumCaseResponse> response = seleniumService.sendTestCases(seleniumCases);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<List<SeleniumResponse>> runTests(@RequestBody List<SeleniumCase> seleniumCases) {
+        // Exécute chaque cas de test avec SeleniumTestService
+        List<SeleniumResponse> responses = seleniumCases.stream()
+                .map(seleniumTestService::executeTestCase)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(responses);
     }
 }

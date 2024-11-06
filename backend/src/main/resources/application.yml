@@ -4,6 +4,9 @@ spring:
     url: jdbc:mysql://nostrasoft.com:3306/nostr321_taf-db
     username: nostr321_taf
     password: JKaVLX75iHwtrHc
+  security:
+    enabled: false
+
   jpa:
     defer-datasource-initialization: true
     hibernate:
@@ -25,8 +28,23 @@ taf:
     jwtExpirationMs: 86400000
     testAPI_url: http://localhost
     testAPI_port: 8082
-    selenium_container_url: http://selenium
+    #selenium_container_url: http://10.0.0.29 # URL correcte pour Selenium
+    #selenium_container_port: 4444  # Port utilisé par Selenium Grid
+    selenium_container_url: http://localhost
     selenium_container_port: 8090
+
+
+logging:
+  level:
+    #root: DEBUG
+    #org.springframework: DEBUG
+    #org.springframework.web: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.springframework.web.reactive.function.client.WebClient: DEBUG
+
+server.error.whitelabel.enabled: false
+
+  
 
 server:
   port: 8083
