@@ -109,7 +109,7 @@ public class SeleniumTestService {
                     case 6: // Click
                         try {
                             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 secondes d'attente
-                            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id(seleniumAction.getObject())));
+                            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(seleniumAction.getObject())));
                             element.click();
                         } catch (NoSuchElementException e) {
                             setFailureResponse(seleniumResponse, driver, startTime, "L'élément avec l'ID '" + seleniumAction.getObject() + "' est introuvable.");
@@ -222,7 +222,7 @@ public class SeleniumTestService {
                     
                     case 15: // Input
                         try {
-                            WebElement inputField = driver.findElement(By.name(seleniumAction.getObject()));
+                            WebElement inputField = driver.findElement(By.cssSelector(seleniumAction.getObject()));
                             inputField.clear();
                             inputField.sendKeys(seleniumAction.getInput()); // Texte à insérer
                         } catch (NoSuchElementException e) {
